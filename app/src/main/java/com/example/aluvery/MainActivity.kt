@@ -10,6 +10,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -29,8 +30,12 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.aluvery.ui.theme.AluveryTheme
 import com.example.aluvery.ui.theme.Purple40
 import com.example.aluvery.ui.theme.PurpleGrey80
@@ -70,15 +75,20 @@ fun HelloWorldPreview() {
 @Preview(showBackground = true)
 @Composable
 private fun ProductItem() {
-    Column(Modifier
-        .width(250.dp)
-        .height(200.dp)
+    Column(
+        Modifier
+            .width(200.dp)
+            .height(250.dp)
     ) {
         Box(
             Modifier
-                .background(brush = Brush.horizontalGradient(listOf(
-                    Purple40, PurpleGrey80
-                )))
+                .background(
+                    brush = Brush.horizontalGradient(
+                        listOf(
+                            Purple40, PurpleGrey80
+                        )
+                    )
+                )
                 .fillMaxWidth()
                 .height(100.dp)
         ) {
@@ -93,7 +103,23 @@ private fun ProductItem() {
             )
         }
 
-        Text("Nome do produto")
-        Text("R$ Preço")
+        Spacer(Modifier.height(50.dp))
+
+        Column(Modifier.padding(16.dp)) {
+            Text(
+                LoremIpsum(50).values.first(),
+                fontSize = 18.sp,
+                fontWeight = FontWeight(700),
+                maxLines = 2,
+                overflow = TextOverflow.Ellipsis
+            )
+
+            Text(
+                "R$ Preço",
+                Modifier.padding(top = 8.dp),
+                fontSize = 14.sp,
+                fontWeight = FontWeight(400)
+            )
+        }
     }
 }
